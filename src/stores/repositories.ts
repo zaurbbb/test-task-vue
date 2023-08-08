@@ -7,41 +7,26 @@ import { watchEffect } from "vue";
 import { apolloClient } from "../api/index";
 import {
   GET_REPOSITORIES_BY_QUERY,
-  GET_REPOSITORIES_BY_USERNAME,
   GET_REPOSITORY_BY_NAME,
 } from "../constants/graphql";
 
 export const useRepositoriesStore = defineStore("repositories", {
   state: (): State => ({
     data: [],
+    paginatedData: [],
     object: {},
     isLoading: false,
     error: null,
+    currentPage: 1,
+    totalPages: 0,
+    limit: 10,
   }),
   actions: {
-    getRepositoriesByUsername(username: string) {
-      try {
-        const {
-          result,
-          loading,
-        } = useQuery(
-          GET_REPOSITORIES_BY_USERNAME,
-          { username },
-        );
-        watchEffect(() => {
-          this.isLoading = loading.value;
-          this.data = result.value?.user?.repositories?.edges || [];
-          this.isLoading = loading.value;
-        });
-      } catch (error) {
-        return error;
-      }
-    },
-    getRepositoriesByQuery(
+    getRepositories(
       username: string,
       query: string,
+      currentPage: number,
     ) {
-      provideApolloClient(apolloClient);
       try {
         const queryString = `user:${username} ${query}`;
         const {
@@ -53,11 +38,17 @@ export const useRepositoriesStore = defineStore("repositories", {
         );
         watchEffect(() => {
           this.isLoading = loading.value;
+          this.totalPages = Math.ceil(this.data.length / this.limit);
           this.data = result.value?.search?.edges || [];
+          this.paginatedData = this.data.slice(
+            currentPage - 1,
+            currentPage - 1 + this.limit,
+          );
+          this.currentPage = currentPage;
           this.isLoading = loading.value;
         });
       } catch (error) {
-        console.log(error);
+        return error;
       }
     },
     getRepositoryByName(
@@ -80,7 +71,6 @@ export const useRepositoriesStore = defineStore("repositories", {
         watchEffect(() => {
           if (error.value) {
             this.error = error.value;
-          console.log("ggg");
           }
 
           if (!error.value) {
@@ -93,6 +83,13 @@ export const useRepositoriesStore = defineStore("repositories", {
       } catch (error) {
         console.log(error);
       }
+    },
+    paginateRepositories(page: number) {
+      this.paginatedData = this.data.slice(
+        page - 1,
+        page - 1 + this.limit,
+      );
+      this.currentPage = page;
     },
   },
 });

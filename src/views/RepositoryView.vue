@@ -45,11 +45,11 @@ export default defineComponent({
     };
   },
   setup() {
-
     const route = useRoute();
     const repository = ref(null);
     const name = ref(route.params.name);
     const error = ref(null);
+    const currentPage = ref(1);
 
     const fetchRepository = () => {
       repositoriesStore.getRepositoryByName(username, name.value);
