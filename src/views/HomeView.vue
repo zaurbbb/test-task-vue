@@ -118,12 +118,13 @@ export default defineComponent({
   height: 3rem;
 
   border-radius: 10rem;
+
+  cursor: pointer;
 }
 .current-page {
   background-color: #000;
 
   color: #fff;
 
-  cursor: pointer;
 }
 </style>
