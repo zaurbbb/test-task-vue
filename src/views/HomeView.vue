@@ -6,6 +6,19 @@
       class="input__search"
     />
     <h3>{{ username }}'s repositories list</h3>
+    <div class="page__wrapper">
+      <div
+        v-for="pageNumber in totalPages"
+        :key="pageNumber"
+        class="page"
+        :class="{
+          'current-page': page === pageNumber,
+        }"
+        @click="changePage(pageNumber)"
+      >
+        {{ pageNumber }}
+      </div>
+    </div>
     <repository-list
       v-if="repositories && repositories.length > 0"
       :repositories="repositories"
@@ -40,9 +53,33 @@ export default defineComponent({
       isLoading: false,
       searchQuery: "",
       username,
+      page: 1,
+      totalPages: 10,
+      perPage: 10,
     };
   },
+  methods: {
+    changePage(pageNumber: number) {
+      this.page = pageNumber;
+    },
+  },
   setup() {
+    const page = ref(1);
+    const perPage = ref(10);
+
+    // const { posts, totalPage, isPostsLoading } = usePosts(10);
+    // const { selectedSort, sortedPosts } = useSortedPosts(posts);
+    // const { sortedAndSearchedPosts, searchQuery } = useSortedAndSearchedPosts(sortedPosts);
+    // return {
+    //   posts,
+    //   totalPage,
+    //   isPostsLoading,
+    //   sortedPosts,
+    //   selectedSort,
+    //   searchQuery,
+    //   sortedAndSearchedPosts,
+    // };
+
     const repositories = ref(null);
     const searchQuery = ref("");
 
@@ -51,7 +88,7 @@ export default defineComponent({
       repositories.value = repositoriesStore.data;
     };
 
-    const searchRepositories = () => {
+    const searchAndPaginateRepositories = () => {
       repositoriesStore.getRepositoriesByQuery(username, searchQuery.value);
       repositories.value = repositoriesStore.data;
     };
@@ -60,7 +97,7 @@ export default defineComponent({
       if (searchQuery.value === "") {
         fetchRepositories();
       } else {
-        searchRepositories();
+        searchAndPaginateRepositories();
       }
     });
 
@@ -74,3 +111,17 @@ export default defineComponent({
   },
 });
 </script>
+
+<style scoped>
+.page__wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 20px 0;
+  gap: 10px;
+}
+.current-page {
+  background-color: #000;
+  color: #fff;
+}
+</style>

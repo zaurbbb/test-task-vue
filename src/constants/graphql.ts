@@ -50,6 +50,7 @@ query GetRepository($owner: String!, $name: String!) {
       avatarUrl,
     }
     primaryLanguage {
+      name
       color
     } 
     description

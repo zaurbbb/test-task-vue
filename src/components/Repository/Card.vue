@@ -14,7 +14,10 @@
         <p class="repository-card__text">{{ description }}</p>
       </div>
       <div class="repository-card__meta">
-          <shared-stars :stars="stargazerCount" />
+        <shared-stars :stars="stargazerCount" />
+      </div>
+      <div class="repository-card__meta">
+        <shared-primary-language :primary-language="primaryLanguage" />
       </div>
     </div>
   </article>
@@ -25,10 +28,11 @@ import CustomItemWrapper from "../UI/CustomItemWrapper.vue";
 import CustomRepositoryVisibility from "../UI/CustomVisibility.vue";
 import SharedStars from "../Shared/SharedStars.vue";
 import SharedBreadcrumbs from "../Shared/SharedBreadcrumbs.vue";
+import SharedPrimaryLanguage from "../Shared/SharedPrimaryLanguage.vue";
 
 export default {
   name: "RepositoryCard",
-  components: { SharedBreadcrumbs, SharedStars, CustomItemWrapper, CustomRepositoryVisibility },
+  components: { SharedPrimaryLanguage, SharedBreadcrumbs, SharedStars, CustomItemWrapper, CustomRepositoryVisibility },
   props: {
     repository: {
       type: Object,
@@ -43,8 +47,7 @@ export default {
       url: this.repository.url,
       isPrivate: this.repository.isPrivate,
       owner: this.repository.owner,
-      // primaryLanguageName: this.repository.primaryLanguage.name,
-      // primaryLanguageColor: this.repository.primaryLanguage.color,
+      primaryLanguage: this.repository.primaryLanguage,
       description: this.repository.description || "No description provided",
     };
   },

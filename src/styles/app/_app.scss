@@ -47,6 +47,7 @@ main {
   section {
     @include flex-column;
     gap: $fs-xxlarge;
+    margin-bottom: 5rem;
   }
 }
 

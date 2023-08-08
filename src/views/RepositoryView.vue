@@ -45,6 +45,7 @@ export default defineComponent({
     };
   },
   setup() {
+
     const route = useRoute();
     const repository = ref(null);
     const name = ref(route.params.name);
