@@ -1,0 +1,82 @@
+/**
+* @desc         set up variables.
+* @requires     none
+*/
+
+// [color - variables]
+// branding
+$primary-hover-color: #1e4a8b;
+$primary-color: #2A56A9;
+$secondary-color: #858585FF;
+$light-color: #bbb3b3;
+$dark-color: #606060;
+
+// col colors
+$correct-color: #4CAF50;
+$wrong-color: #F44336;
+
+// button colors
+//$greeting-button-color: rgba($primary-dark-color, 0.8);
+//$greeting-button-hover-color: $primary-dark-color;
+
+// font size
+$fs-xxxsmall: .2rem;
+$fs-xxsmall: 1rem;
+$fs-xsmall: 1.2rem;
+$fs-small: 1.4rem;
+$fs-regular: 1.6rem; // -> base size
+$fs-medium: 1.8rem;
+$fs-large: 2rem;
+$fs-xlarge: 2.2rem;
+$fs-xxlarge: 2.4rem;
+
+// webkit
+//$webkit-bg: rgba($primary-dark-color, .8);
+
+// font family
+$ff-light: "RubikLight", sans-serif;
+$ff-bold: "RubikBold", sans-serif;
+$ff-medium: "RubikMedium", sans-serif;
+$ff-regular: "RubikRegular", sans-serif;
+$ff-code: Consolas, Monaco, "Lucida Console", monospace;
+
+// font weights
+$fw-light: 300;
+$fw-regular: 400;
+$fw-medium: 500;
+$fw-bold: 600;
+
+
+// [action - variables]
+// hover
+//$primary-hover-color-1: rgba($primary-dark-color, 0.2);
+//$primary-hover-color-2: rgba($primary-dark-color, 0.4);
+//$primary-hover-color-3: rgba($primary-dark-color, 0.6);
+
+// [breakpoints - variables]
+$xxl: 1400px;
+$xl: 1200px;
+$lg: 992px;
+$md: 768px;
+$sm: 540px;
+$xs: 280px;
+
+
+// [border radius - variables]
+$border-radius-small: $fs-regular;
+$border-radius-medium: 2 * $fs-medium;
+$border-radius-large: $fs-large;
+$border-radius-maximum: $fs-xxlarge * 4;
+
+// [shadow - variables]
+// shadows
+$card-box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+//$box-shadow-medium: 0 8px 11px rgba(0, 0, 0, 0.1), 0 9px 12px rgba(0, 0, 0, 0.2);
+//$text-shadow-light: $secondary-dark-color 1px 1px 5px;
+
+// [padding - variables]
+$header-mobile-padding: $fs-xlarge $fs-xxlarge * 1.5;
+$header-tablet-padding: $fs-xxlarge * 2 $fs-xxlarge * 1.5;
+$card-phone-padding: $fs-medium $fs-xxlarge $fs-xxlarge;
+$card-tablet-padding: $fs-medium $fs-xxlarge * 4 $fs-xxlarge * 1.5;
+$card-desktop-padding: $fs-xxlarge * 1.5;

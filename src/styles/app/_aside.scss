@@ -1,0 +1,35 @@
+/**
+* @desc         app aside styles
+* @requires     variables, mixins
+*/
+
+.aside {
+  @include flex-column;
+  @include flex-center;
+  gap: $fs-xxlarge;
+
+  &__nav {
+    @include flex-row;
+    gap: $fs-large;
+
+    font-size: $fs-large;
+
+    &:hover {
+    }
+  }
+
+  &__link {
+    color: $dark-color;
+
+    transition: all .2s ease-in-out;
+
+    &:hover {
+      color: $secondary-color;
+    }
+
+    &.router-link-exact-active {
+      color: $primary-color;
+    }
+  }
+
+}

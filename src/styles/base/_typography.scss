@@ -1,0 +1,33 @@
+/**
+* @desc         adds default text styles
+* @requires     none
+*/
+
+@font-face {
+  font-family: "RubikBold";
+  src: url("/fonts/Rubik-Bold.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "RubikMedium";
+  src: url("/fonts/Rubik-Medium.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "RubikRegular";
+  src: url("/fonts/Rubik-Regular.ttf") format("truetype");
+}
+
+@font-face {
+  font-family: "RubikLight";
+  src: url("/fonts/Rubik-Light.ttf") format("truetype");
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 !important;
+}

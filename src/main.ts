@@ -1,18 +1,18 @@
 import { DefaultApolloClient } from "@vue/apollo-composable";
-import { createApolloProvider } from '@vue/apollo-option';
-import { createPinia } from 'pinia';
+import { createApolloProvider } from "@vue/apollo-option";
+import { createPinia } from "pinia";
 import {
   createApp,
   h,
   provide,
-} from 'vue';
+} from "vue";
+
 import { apolloClient } from "./api";
 
-// @ts-ignore
-import App from './App.vue';
+import App from "./app/App.vue";
+import router from "./router";
 
-import './assets/main.css';
-import router from './router';
+import "./styles/main.css";
 
 const apolloProvider = createApolloProvider({
   defaultClient: apolloClient,
@@ -30,4 +30,4 @@ app.use(apolloProvider);
 app.use(createPinia());
 app.use(router);
 
-app.mount('#app');
+app.mount("#app");

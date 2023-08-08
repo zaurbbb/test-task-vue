@@ -1,0 +1,59 @@
+/**
+* @desc         repository item component styles
+* @requires     variables
+*/
+
+.repository-item {
+  @include flex-column;
+  justify-content: space-between;
+  gap: $fs-regular;
+
+  height: 12rem;
+  padding: 2rem;
+
+  border-radius: $fs-regular;
+  border: 1px solid $secondary-color;
+
+  transition: border .2ms ease-in-out;
+
+  &:hover {
+    border: 1px solid $primary-color;
+  }
+
+  &__header {
+    @include flex-row;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  &__body {
+    @include flex-row;
+    gap: $fs-xxlarge;
+  }
+
+  &__wrapper {
+    @include flex-row;
+    align-items: center;
+    gap: $fs-xxxsmall;
+  }
+
+  &__is-private {
+    padding: 0.5rem 1rem;
+
+    border: 1px solid $secondary-color;
+    border-radius: 2rem;
+
+    color: $secondary-color;
+    font-size: $fs-xsmall;
+    font-family: $ff-medium;
+  }
+
+  &__icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  &__info {
+    color: $dark-color;
+  }
+}

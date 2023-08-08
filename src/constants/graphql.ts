@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from "graphql-tag";
 
 export const GET_REPOSITORIES_BY_USERNAME = gql`
 query GetUserRepositories($username: String!) {
@@ -6,10 +6,12 @@ query GetUserRepositories($username: String!) {
      repositories(first: 100, orderBy: { field: UPDATED_AT, direction: DESC }) {
       edges {
         node {
+          id
           name
           stargazerCount
           updatedAt
           url
+          isPrivate
         }
       }
     }
@@ -23,13 +25,33 @@ query GetSearchedRepositories($query: String!) {
     edges {
       node {
         ... on Repository {
+          id
           name
           stargazerCount
           updatedAt
           url
+          isPrivate
         }
       }
     }
   } 
+}
+`;
+export const GET_REPOSITORY_BY_ID = gql`
+query GetUserRepositories($username: String!) {
+  user(login: $username) {
+     repositories(first: 100, orderBy: { field: UPDATED_AT, direction: DESC }) {
+      edges {
+        node {
+          id
+          name
+          stargazerCount
+          updatedAt
+          url
+          isPrivate
+        }
+      }
+    }
+  }
 }
 `;

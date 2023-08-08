@@ -1,5 +1,6 @@
 <template>
   <input
+    class="custom-input"
     type="text"
     :value="modelValue"
     @input="updateInput"

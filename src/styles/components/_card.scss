@@ -1,0 +1,90 @@
+/**
+* @desc         card component styles
+* @requires     variables, mixins
+*/
+
+.card {
+  @include flex-column;
+  @include flex-center;
+  gap: $fs-medium;
+
+  @include for-desktop {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+
+    &__title {
+      grid-column-start: 1;
+      grid-column-end: 3;
+    }
+    &__image-wrapper {
+      grid-column-start: 1;
+      grid-column-end: 2;
+      grid-row-start: 2;
+      grid-row-end: 5;
+      //grid-row-end: 4
+    }
+    &__description {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 3;
+      // grid-row-end: 2;
+      grid-row-end: 3;
+    }
+    &__text {
+      grid-column-start: 2;
+      grid-column-end: 3;
+      grid-row-start: 3;
+      grid-row-end: 3;
+    }
+  }
+
+  height: 100%;
+  padding: $card-phone-padding;
+  @include for-tablet {
+    padding: $card-tablet-padding;
+  }
+  @include for-desktop {
+    padding: $card-desktop-padding;
+  }
+
+  box-shadow: $card-box-shadow;
+  border-radius: $border-radius-medium;
+  @include for-desktop {
+    border-radius: $border-radius-small;
+  }
+
+
+  font-family: $ff-regular;
+  text-align: center;
+  @include for-desktop {
+    text-align: left;
+  }
+
+  &__image-wrapper {
+    text-align: center;
+    //width: 100%;
+  }
+
+  &__image {
+    height: 100%;
+  }
+
+  @include for-desktop {
+    &__description {
+      //padding-right: $fs-xxlarge;
+    }
+  }
+
+  &__text {
+    color: $primary-color;
+  }
+
+  &__logo {
+    @include for-phone {
+      @include size(3rem, 3rem);
+    }
+    @include for-tablet {
+      @include size(4rem, 4rem);
+    }
+  }
+}

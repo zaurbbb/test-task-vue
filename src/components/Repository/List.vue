@@ -1,7 +1,6 @@
 <template>
-  <div v-if="repositories.length > 0">
-    <h3>List of Items</h3>
-    <transition-group name="post-list">
+  <div class="repositories-list">
+    <transition-group name="repositories-list">
       <repository-item
         v-for="{ node } of repositories"
         :key="node.name"
@@ -9,8 +8,6 @@
       />
     </transition-group>
   </div>
-  <h2 v-else>No posts yet..</h2>
-  <button @click="logRepositories">aufauf</button>
 </template>
 
 <script lang="ts">
@@ -22,13 +19,11 @@ export default defineComponent({
   components: { RepositoryItem },
   props: {
     repositories: {
-      type: Array,
+      type: [
+        Array,
+        null,
+      ],
       required: true,
-    },
-  },
-  methods: {
-    logRepositories() {
-      console.log(this.repositories);
     },
   },
 });

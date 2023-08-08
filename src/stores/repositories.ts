@@ -1,5 +1,4 @@
 import {
-  DefaultApolloClient,
   provideApolloClient,
   useQuery,
 } from "@vue/apollo-composable";
@@ -21,7 +20,7 @@ interface State {
   isLoading: boolean;
 }
 
-export const useRepositoriesStore = defineStore('repositories', {
+export const useRepositoriesStore = defineStore("repositories", {
   // useApollo()
   state: (): State => ({
     data: [],

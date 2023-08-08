@@ -1,0 +1,62 @@
+/**
+* @desc         mixins of the app.
+* @requires     variables.scss
+*/
+
+// flex manager
+// flex
+@mixin flex {
+  display: flex;
+}
+
+@mixin flex-row {
+  @include flex;
+  flex-direction: row;
+}
+
+@mixin flex-column {
+  @include flex;
+  flex-direction: column;
+}
+
+@mixin flex-center {
+  align-items: center;
+  justify-content: center;
+}
+
+// size manager
+@mixin size($w, $h) {
+  width: $w;
+  height: $h;
+}
+
+// responsive breakpoint manager
+@mixin for-fold {
+  @media only screen and (min-width: $xs) {
+    @content;
+  }
+}
+
+@mixin for-phone {
+  @media only screen and (min-width: $sm) {
+    @content;
+  }
+}
+
+@mixin for-tablet {
+  @media only screen and (min-width: $md) {
+    @content;
+  }
+}
+
+@mixin for-desktop {
+  @media only screen and (min-width: $lg) {
+    @content;
+  }
+}
+
+@mixin for-pc {
+  @media only screen and (min-width: $xl) {
+    @content;
+  }
+}

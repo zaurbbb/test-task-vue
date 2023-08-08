@@ -1,0 +1,389 @@
+/**
+* @desc         set up variables.
+* @requires     none
+*/
+/**
+* @desc         mixins of the app.
+* @requires     variables.scss
+*/
+html ::-webkit-scrollbar {
+  width: 6px;
+  height: 8px;
+  background-color: transparent;
+}
+html ::-webkit-scrollbar-thumb {
+  border-radius: 10px;
+  -webkit-box-shadow: inset 0 0 6px #2A56A9;
+  background-color: transparent;
+}
+html ::-webkit-scrollbar-thumb:hover {
+  background-color: #1e4a8b;
+}
+
+/**
+* @desc         app styles
+* @requires     variables, placeholders
+*/
+:root {
+  font-size: 62.5%; /* (62.5/100) * 16px = 10px */
+}
+
+#app {
+  display: grid;
+  grid-template-columns: 20vw 80vw;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+  padding: 0;
+  font-family: "RubikRegular", sans-serif;
+  font-size: 1.4rem;
+}
+@media only screen and (min-width: 768px) {
+  #app {
+    font-size: 1.6rem;
+  }
+}
+
+aside {
+  width: 20vw;
+  text-align: center;
+}
+
+main {
+  overflow-x: hidden;
+  overflow-y: auto;
+  width: 80vw;
+  height: 100vh;
+}
+main section {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  padding: 2.4rem 0;
+}
+
+a {
+  text-decoration: none;
+  color: #2A56A9;
+}
+a:hover {
+  color: #1e4a8b;
+}
+
+/**
+* @desc         app aside styles
+* @requires     variables, mixins
+*/
+.aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 2.4rem;
+}
+.aside__nav {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  font-size: 2rem;
+}
+.aside__link {
+  color: #606060;
+  transition: all 0.2s ease-in-out;
+}
+.aside__link:hover {
+  color: #858585;
+}
+.aside__link.router-link-exact-active {
+  color: #2A56A9;
+}
+
+/**
+* @desc         adds default text styles
+* @requires     none
+*/
+@font-face {
+  font-family: "RubikBold";
+  src: url("/fonts/Rubik-Bold.ttf") format("truetype");
+}
+@font-face {
+  font-family: "RubikMedium";
+  src: url("/fonts/Rubik-Medium.ttf") format("truetype");
+}
+@font-face {
+  font-family: "RubikRegular";
+  src: url("/fonts/Rubik-Regular.ttf") format("truetype");
+}
+@font-face {
+  font-family: "RubikLight";
+  src: url("/fonts/Rubik-Light.ttf") format("truetype");
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0 !important;
+}
+
+*, *:before, *:after {
+  box-sizing: border-box;
+}
+
+html, body, div, span, object, iframe, figure, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, code, em, img, small, strike, strong, sub, sup, tt, b, u, i, ol, ul, li, fieldset, form, label, table, caption, tbody, tfoot, thead, tr, th, td, main, canvas, embed, footer, header, nav, section, video {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  text-size-adjust: none;
+}
+
+footer, header, nav, section, main {
+  display: block;
+}
+
+body {
+  line-height: 1;
+}
+
+ol, ul {
+  list-style: none;
+}
+
+blockquote, q {
+  quotes: none;
+}
+
+blockquote:before, blockquote:after, q:before, q:after {
+  content: "";
+}
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+a {
+  text-decoration: none;
+}
+
+/**
+* @desc         animations
+* @requires     none
+*/
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(3rem);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+/**
+* @desc         card component styles
+* @requires     variables, mixins
+*/
+.card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 1.8rem;
+  height: 100%;
+  padding: 1.8rem 2.4rem 2.4rem;
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
+  border-radius: 3.6rem;
+  font-family: "RubikRegular", sans-serif;
+  text-align: center;
+}
+@media only screen and (min-width: 992px) {
+  .card {
+    display: grid;
+    grid-template-columns: 8rem 1fr;
+  }
+  .card__title {
+    grid-column-start: 1;
+    grid-column-end: 3;
+  }
+  .card__image-wrapper {
+    grid-column-start: 1;
+    grid-column-end: 2;
+    grid-row-start: 2;
+    grid-row-end: 5;
+  }
+  .card__description {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 3;
+  }
+  .card__text {
+    grid-column-start: 2;
+    grid-column-end: 3;
+    grid-row-start: 3;
+    grid-row-end: 3;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .card {
+    padding: 1.8rem 9.6rem 3.6rem;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .card {
+    padding: 3.6rem;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .card {
+    border-radius: 1.6rem;
+  }
+}
+@media only screen and (min-width: 992px) {
+  .card {
+    text-align: left;
+  }
+}
+.card__image-wrapper {
+  text-align: center;
+}
+.card__image {
+  height: 100%;
+}
+.card__text {
+  color: #2A56A9;
+}
+@media only screen and (min-width: 540px) {
+  .card__logo {
+    width: 3rem;
+    height: 3rem;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .card__logo {
+    width: 4rem;
+    height: 4rem;
+  }
+}
+
+/**
+* @desc         repositories list component styles
+* @requires     variables
+*/
+.repositories-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.4rem;
+  width: 95%;
+  height: auto;
+  padding-right: 3rem;
+}
+
+/**
+* @desc         repository item component styles
+* @requires     variables
+*/
+.repository-item {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 1.6rem;
+  height: 12rem;
+  padding: 2rem;
+  border-radius: 1.6rem;
+  border: 1px solid #858585;
+  transition: border 0.2ms ease-in-out;
+}
+.repository-item:hover {
+  border: 1px solid #2A56A9;
+}
+.repository-item__header {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.repository-item__body {
+  display: flex;
+  flex-direction: row;
+  gap: 2.4rem;
+}
+.repository-item__wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 0.2rem;
+}
+.repository-item__is-private {
+  padding: 0.5rem 1rem;
+  border: 1px solid #858585;
+  border-radius: 2rem;
+  color: #858585;
+  font-size: 1.2rem;
+  font-family: "RubikMedium", sans-serif;
+}
+.repository-item__icon {
+  width: 2rem;
+  height: 2rem;
+}
+.repository-item__info {
+  color: #606060;
+}
+
+/**
+* @desc         custom input component styles
+* @requires     variables
+*/
+.custom-input {
+  width: 20vw;
+  padding: 1rem;
+  border: 1px solid #606060;
+  border-radius: 5px;
+  transition: border-color 0.3s, box-shadow 0.3s;
+}
+.custom-input:focus {
+  outline: none;
+  border-color: #2A56A9;
+  box-shadow: 0 0 5px rgba(42, 86, 169, 0.5);
+}
+.custom-input::placeholder {
+  color: #999;
+}
+
+/**
+* @desc         custom loader component styles
+* @requires     variables
+*/
+.custom-loader {
+  display: inline-block;
+  width: 80px;
+  height: 80px;
+}
+
+.custom-loader:after {
+  content: " ";
+  display: block;
+  width: 64px;
+  height: 64px;
+  margin: 8px;
+  border-radius: 50%;
+  border: 6px solid #606060;
+  border-color: #606060 transparent #606060 transparent;
+  animation: loader-animation 1.2s linear infinite;
+}
+
+@keyframes loader-animation {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/*# sourceMappingURL=main.css.map */

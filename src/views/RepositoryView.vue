@@ -1,17 +1,6 @@
 <template>
   <section>
-    <custom-input
-      v-model="searchQuery"
-      placeholder="Search..."
-      class="input__search"
-    />
-    <h3>{{ username }}'s repositories list</h3>
-    <repository-list
-      v-if="repositories && repositories.length > 0"
-      :repositories="repositories"
-    />
-<!--    <h2 v-else-if="repositories && repositories.length === 0">No posts yet..</h2>-->
-    <custom-loader v-else />
+    <div>User {{ $route.params.id }}</div>
   </section>
 </template>
 

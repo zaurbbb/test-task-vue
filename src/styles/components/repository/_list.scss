@@ -1,0 +1,15 @@
+/**
+* @desc         repositories list component styles
+* @requires     variables
+*/
+
+.repositories-list {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $fs-xxlarge;
+
+  width: 95%;
+  height: auto;
+  padding-right: 3rem;
+
+}
