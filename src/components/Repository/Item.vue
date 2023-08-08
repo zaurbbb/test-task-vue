@@ -1,5 +1,10 @@
 <template>
-
+ <div>
+   {{ repository.name }}
+   {{ repository.stargazerCount }}
+   {{ repository.updatedAt }}
+   {{ repository.url }}
+ </div>
 </template>
 
 <script lang="ts">
