@@ -28,32 +28,6 @@
 
   &__body {
     @include flex-row;
-    gap: $fs-xxlarge;
-  }
-
-  &__wrapper {
-    @include flex-row;
-    align-items: center;
-    gap: $fs-xxxsmall;
-  }
-
-  &__is-private {
-    padding: 0.5rem 1rem;
-
-    border: 1px solid $secondary-color;
-    border-radius: 2rem;
-
-    color: $secondary-color;
-    font-size: $fs-xsmall;
-    font-family: $ff-medium;
-  }
-
-  &__icon {
-    width: 2rem;
-    height: 2rem;
-  }
-
-  &__info {
-    color: $dark-color;
+    gap: $fs-xlarge;
   }
 }

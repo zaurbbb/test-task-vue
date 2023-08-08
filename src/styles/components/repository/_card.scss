@@ -1,0 +1,46 @@
+/**
+* @desc         repository card component styles
+* @requires     variables
+*/
+
+.repository-card {
+  width: 90%;
+
+  &__header {
+    @include flex-row;
+    gap: $fs-xsmall;
+    align-items: center;
+
+    padding: $fs-small 0;
+
+
+    border-bottom: 1px solid $secondary-color;
+
+    & .custom-item-wrapper:first-child .custom-item-wrapper__icon {
+      width: 3rem;
+      height: 3rem;
+      border-radius: 2rem;
+    }
+  }
+
+  &__body {
+    @include flex-column;
+    gap: $fs-xxlarge;
+
+    padding: $fs-xxlarge 0;
+  }
+
+  &__meta {
+    @include flex-column;
+    gap: $fs-small;
+  }
+
+  &__title {
+    font-size: $fs-large;
+  }
+
+  &__text {
+    font-size: $fs-medium;
+    color: $secondary-color;
+  }
+}

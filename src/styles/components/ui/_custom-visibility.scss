@@ -1,0 +1,17 @@
+/**
+* @desc         custom visibility component styles
+* @requires     variables
+*/
+
+.custom-visibility {
+  @include flex;
+  @include flex-center;
+  padding: 0.5rem 1rem;
+
+  border: 1px solid $secondary-color;
+  border-radius: 2rem;
+
+  color: $secondary-color;
+  font-size: $fs-xsmall;
+  font-family: $ff-medium;
+}

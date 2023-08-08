@@ -5,7 +5,8 @@
 
 .aside {
   @include flex-column;
-  @include flex-center;
+  align-items: center;
+  justify-content: center;
   gap: $fs-xxlarge;
 
   &__nav {

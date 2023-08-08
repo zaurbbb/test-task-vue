@@ -1,0 +1,19 @@
+/**
+* @desc         custom item wrapper component styles
+* @requires     variables
+*/
+
+.custom-item-wrapper {
+  @include flex-row;
+  align-items: center;
+  gap: $fs-xxsmall;
+
+  &__icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  &__info {
+    color: $dark-color;
+  }
+}

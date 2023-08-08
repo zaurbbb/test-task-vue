@@ -14,12 +14,15 @@ html {
 #app {
   display: grid;
   grid-template-columns: 20vw 80vw;
-  align-items: center;
+  align-items: start;
+  overflow: hidden;
+
 
   height: 100vh;
+  padding: $fs-xxlarge 0;
 
   margin: 0;
-  padding: 0;
+  //padding: 0;
 
   font-family: $ff-regular;
   font-size: $fs-small;
@@ -38,14 +41,12 @@ main {
   overflow-x: hidden;
   overflow-y: auto;
 
-  width: 80vw;
+  width: 75vw;
   height: 100vh;
 
   section {
     @include flex-column;
     gap: $fs-xxlarge;
-
-    padding: $fs-xxlarge 0;
   }
 }
 

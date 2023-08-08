@@ -31,10 +31,11 @@ html ::-webkit-scrollbar-thumb:hover {
 #app {
   display: grid;
   grid-template-columns: 20vw 80vw;
-  align-items: center;
+  align-items: start;
+  overflow: hidden;
   height: 100vh;
+  padding: 2.4rem 0;
   margin: 0;
-  padding: 0;
   font-family: "RubikRegular", sans-serif;
   font-size: 1.4rem;
 }
@@ -52,14 +53,13 @@ aside {
 main {
   overflow-x: hidden;
   overflow-y: auto;
-  width: 80vw;
+  width: 75vw;
   height: 100vh;
 }
 main section {
   display: flex;
   flex-direction: column;
   gap: 2.4rem;
-  padding: 2.4rem 0;
 }
 
 a {
@@ -185,93 +185,6 @@ a {
   }
 }
 /**
-* @desc         card component styles
-* @requires     variables, mixins
-*/
-.card {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  gap: 1.8rem;
-  height: 100%;
-  padding: 1.8rem 2.4rem 2.4rem;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.25);
-  border-radius: 3.6rem;
-  font-family: "RubikRegular", sans-serif;
-  text-align: center;
-}
-@media only screen and (min-width: 992px) {
-  .card {
-    display: grid;
-    grid-template-columns: 8rem 1fr;
-  }
-  .card__title {
-    grid-column-start: 1;
-    grid-column-end: 3;
-  }
-  .card__image-wrapper {
-    grid-column-start: 1;
-    grid-column-end: 2;
-    grid-row-start: 2;
-    grid-row-end: 5;
-  }
-  .card__description {
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 3;
-    grid-row-end: 3;
-  }
-  .card__text {
-    grid-column-start: 2;
-    grid-column-end: 3;
-    grid-row-start: 3;
-    grid-row-end: 3;
-  }
-}
-@media only screen and (min-width: 768px) {
-  .card {
-    padding: 1.8rem 9.6rem 3.6rem;
-  }
-}
-@media only screen and (min-width: 992px) {
-  .card {
-    padding: 3.6rem;
-  }
-}
-@media only screen and (min-width: 992px) {
-  .card {
-    border-radius: 1.6rem;
-  }
-}
-@media only screen and (min-width: 992px) {
-  .card {
-    text-align: left;
-  }
-}
-.card__image-wrapper {
-  text-align: center;
-}
-.card__image {
-  height: 100%;
-}
-.card__text {
-  color: #2A56A9;
-}
-@media only screen and (min-width: 540px) {
-  .card__logo {
-    width: 3rem;
-    height: 3rem;
-  }
-}
-@media only screen and (min-width: 768px) {
-  .card__logo {
-    width: 4rem;
-    height: 4rem;
-  }
-}
-
-/**
 * @desc         repositories list component styles
 * @requires     variables
 */
@@ -311,28 +224,61 @@ a {
 .repository-item__body {
   display: flex;
   flex-direction: row;
-  gap: 2.4rem;
+  gap: 2.2rem;
 }
-.repository-item__wrapper {
+
+/**
+* @desc         repository card component styles
+* @requires     variables
+*/
+.repository-card {
+  width: 90%;
+}
+.repository-card__header {
   display: flex;
   flex-direction: row;
+  gap: 1.2rem;
   align-items: center;
-  gap: 0.2rem;
+  padding: 1.4rem 0;
+  border-bottom: 1px solid #858585;
 }
-.repository-item__is-private {
-  padding: 0.5rem 1rem;
-  border: 1px solid #858585;
+.repository-card__header .custom-item-wrapper:first-child .custom-item-wrapper__icon {
+  width: 3rem;
+  height: 3rem;
   border-radius: 2rem;
+}
+.repository-card__body {
+  display: flex;
+  flex-direction: column;
+  gap: 2.4rem;
+  padding: 2.4rem 0;
+}
+.repository-card__meta {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+}
+.repository-card__title {
+  font-size: 2rem;
+}
+.repository-card__text {
+  font-size: 1.8rem;
   color: #858585;
-  font-size: 1.2rem;
-  font-family: "RubikMedium", sans-serif;
 }
-.repository-item__icon {
-  width: 2rem;
-  height: 2rem;
+
+/**
+* @desc         shared breadcrumbs component styles
+* @requires     variables
+*/
+.shared-breadcrumbs__link {
+  color: #858585 !important;
+  font-size: 1.8rem;
 }
-.repository-item__info {
-  color: #606060;
+.shared-breadcrumbs__link:hover {
+  color: #1e4a8b !important;
+}
+.shared-breadcrumbs__link--bold {
+  font-weight: bold;
 }
 
 /**
@@ -384,6 +330,39 @@ a {
   100% {
     transform: rotate(360deg);
   }
+}
+/**
+* @desc         custom item wrapper component styles
+* @requires     variables
+*/
+.custom-item-wrapper {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 1rem;
+}
+.custom-item-wrapper__icon {
+  width: 2rem;
+  height: 2rem;
+}
+.custom-item-wrapper__info {
+  color: #606060;
+}
+
+/**
+* @desc         custom visibility component styles
+* @requires     variables
+*/
+.custom-visibility {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  border: 1px solid #858585;
+  border-radius: 2rem;
+  color: #858585;
+  font-size: 1.2rem;
+  font-family: "RubikMedium", sans-serif;
 }
 
 /*# sourceMappingURL=main.css.map */

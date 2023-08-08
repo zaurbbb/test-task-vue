@@ -1,7 +1,8 @@
 <template>
-  <div class="about">
-    <h1>This is an about page</h1>
-  </div>
+  <section>
+    <h1>About Page</h1>
+    <p>My name is Zaur, I am Front-End Developer from AITU</p>
+  </section>
 </template>
 
 <style>

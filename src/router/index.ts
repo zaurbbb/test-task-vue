@@ -12,7 +12,7 @@ const router = createRouter({
       component: () => import("../views/HomeView.vue"),
     },
     {
-      path: "/repository/:id",
+      path: "/repository/:name",
       name: "repository",
       component: () => import("../views/RepositoryView.vue"),
       props: true,

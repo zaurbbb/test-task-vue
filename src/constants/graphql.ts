@@ -37,21 +37,22 @@ query GetSearchedRepositories($query: String!) {
   } 
 }
 `;
-export const GET_REPOSITORY_BY_ID = gql`
-query GetUserRepositories($username: String!) {
-  user(login: $username) {
-     repositories(first: 100, orderBy: { field: UPDATED_AT, direction: DESC }) {
-      edges {
-        node {
-          id
-          name
-          stargazerCount
-          updatedAt
-          url
-          isPrivate
-        }
-      }
+export const GET_REPOSITORY_BY_NAME = gql`
+query GetRepository($owner: String!, $name: String!) {
+  repository(owner: $owner, name: $name) {
+    name
+    stargazerCount
+    updatedAt
+    url
+    isPrivate
+    owner {
+      login,
+      avatarUrl,
     }
+    primaryLanguage {
+      color
+    } 
+    description
   }
 }
 `;

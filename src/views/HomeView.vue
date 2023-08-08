@@ -72,11 +72,5 @@ export default defineComponent({
       repositoriesStore,
     };
   },
-  watch: {
-    isLoading() {
-      console.log(this.isLoading);
-    },
-  },
 });
-
 </script>

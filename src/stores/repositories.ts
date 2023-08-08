@@ -8,23 +8,15 @@ import { apolloClient } from "../api/index";
 import {
   GET_REPOSITORIES_BY_QUERY,
   GET_REPOSITORIES_BY_USERNAME,
+  GET_REPOSITORY_BY_NAME,
 } from "../constants/graphql";
 
-interface Repository {
-  name: string;
-  age: number;
-}
-
-interface State {
-  data: Repository[];
-  isLoading: boolean;
-}
-
 export const useRepositoriesStore = defineStore("repositories", {
-  // useApollo()
   state: (): State => ({
     data: [],
+    object: {},
     isLoading: false,
+    error: null,
   }),
   actions: {
     getRepositoriesByUsername(username: string) {
@@ -52,7 +44,6 @@ export const useRepositoriesStore = defineStore("repositories", {
       provideApolloClient(apolloClient);
       try {
         const queryString = `user:${username} ${query}`;
-        console.log(queryString);
         const {
           result,
           loading,
@@ -69,6 +60,68 @@ export const useRepositoriesStore = defineStore("repositories", {
         console.log(error);
       }
     },
+    getRepositoryByName(
+      username: string,
+      name: string,
+    ) {
+      provideApolloClient(apolloClient);
+      try {
+        const {
+          result,
+          loading,
+          error,
+        } = useQuery(
+          GET_REPOSITORY_BY_NAME,
+          {
+            owner: username,
+            name,
+          },
+        );
+        watchEffect(() => {
+          if (error.value) {
+            this.error = error.value;
+          console.log("ggg");
+          }
+
+          if (!error.value) {
+            this.isLoading = loading.value;
+            this.object = result.value?.repository || {};
+          }
+
+          this.isLoading = loading.value;
+        });
+      } catch (error) {
+        console.log(error);
+      }
+    },
   },
 });
 
+
+interface Owner {
+  login: string;
+  avatarUrl: string;
+}
+
+interface PrimaryLanguage {
+  color: string;
+  name: string;
+}
+
+interface Repository {
+  id: number;
+  name: string;
+  stargazerCount: number;
+  updatedAt: string;
+  url: string;
+  isPrivate: boolean;
+  owner?: Owner;
+  primaryLanguage?: PrimaryLanguage;
+  description?: string;
+}
+
+interface State {
+  data: Repository[];
+  object: Repository;
+  isLoading: boolean;
+}

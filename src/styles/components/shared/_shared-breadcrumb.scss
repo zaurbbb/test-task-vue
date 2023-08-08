@@ -1,0 +1,20 @@
+/**
+* @desc         shared breadcrumbs component styles
+* @requires     variables
+*/
+
+.shared-breadcrumbs {
+  &__link {
+    color: $secondary-color !important;
+    font-size: $fs-medium;
+
+    &:hover {
+      color: $primary-hover-color !important;
+    }
+
+    &--bold {
+      font-weight: bold;
+    }
+  }
+
+}

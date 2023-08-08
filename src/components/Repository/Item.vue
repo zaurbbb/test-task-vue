@@ -1,60 +1,50 @@
 <template>
-  <div class="repository-item">
+  <article class="repository-item">
     <div class="repository-item__header">
       <router-link
         class="repository-item__link"
-        :to="'/repository/' + repository.id"
+        :to="'/repository/' + repository.name"
       >
         {{ repository.name }}
       </router-link>
-      <span class="repository-item__is-private">
-        {{ isPrivate }}
-      </span>
+      <custom-repository-visibility :is-private="repository.isPrivate" />
     </div>
     <div class="repository-item__body">
-      <div class="repository-item__wrapper">
-        <img
-          class="repository-item__icon"
-          src="https://www.iconarchive.com/download/i134110/github/octicons/star-24.1024.png"
-          alt="github star"
-        >
-        <span class="repository-item__info">
-          {{ repository.stargazerCount }}
-        </span>
-      </div>
-      <div class="repository-item__wrapper">
-        <img
-          class="repository-item__icon"
-          src="https://cdn-icons-png.flaticon.com/512/7182/7182235.png"
-          alt="github star"
-        >
-        <span class="repository-item__info">
-          {{ updatedAt }}
-        </span>
-      </div>
-      <a
-        :href="repository.url"
-        target="_blank"
-        class="repository-item__wrapper"
+      <custom-item-wrapper
+        image="https://icons.iconarchive.com/icons/github/octicons/256/star-24-icon.png"
+        alt="github star"
       >
-        <img
-          class="repository-item__icon"
-          src="https://static-00.iconduck.com/assets.00/share-icon-2048x1911-60w04qpe.png"
-          alt="github star"
+        {{ repository.stargazerCount }}
+      </custom-item-wrapper>
+      <custom-item-wrapper
+        image="https://cdn-icons-png.flaticon.com/512/7182/7182235.png"
+        alt="github star"
+      >
+        {{ updatedAt }}
+      </custom-item-wrapper>
+      <custom-item-wrapper
+        image="https://static-00.iconduck.com/assets.00/share-icon-2048x1911-60w04qpe.png"
+        alt="github link"
+      >
+        <a
+          :href="repository.url"
+          target="_blank"
         >
-        <span class="repository-item__info">
           Go to github
-        </span>
-      </a>
+        </a>
+      </custom-item-wrapper>
     </div>
-  </div>
+  </article>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "vue";
+import CustomItemWrapper from "../UI/CustomItemWrapper.vue";
+import CustomRepositoryVisibility from "../UI/CustomVisibility.vue";
 
 export default defineComponent({
   name: "RepositoryItem",
+  components: { CustomRepositoryVisibility, CustomItemWrapper },
   props: {
     repository: {
       type: Object,
@@ -64,7 +54,6 @@ export default defineComponent({
   data() {
     return {
       link: this.repository.url,
-      isPrivate: this.repository.isPrivate ? "Private" : "Public",
     };
   },
   computed: {
