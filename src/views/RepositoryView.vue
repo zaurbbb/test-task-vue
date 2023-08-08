@@ -7,6 +7,7 @@
     <custom-error v-else-if="error" />
     <custom-loader v-else />
   </section>
+    {{ isLoading }}
 </template>
 
 <script lang="ts">
@@ -49,7 +50,6 @@ export default defineComponent({
     const repository = ref(null);
     const name = ref(route.params.name);
     const error = ref(null);
-    const currentPage = ref(1);
 
     const fetchRepository = () => {
       repositoriesStore.getRepositoryByName(username, name.value);

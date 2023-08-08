@@ -10,12 +10,12 @@ import {
   GET_REPOSITORY_BY_NAME,
 } from "../constants/graphql";
 
+provideApolloClient(apolloClient);
 export const useRepositoriesStore = defineStore("repositories", {
   state: (): State => ({
     data: [],
     paginatedData: [],
     object: {},
-    isLoading: false,
     error: null,
     currentPage: 1,
     totalPages: 0,
@@ -24,29 +24,21 @@ export const useRepositoriesStore = defineStore("repositories", {
   actions: {
     getRepositories(
       username: string,
-      query: string,
+      queryString: string,
       currentPage: number,
     ) {
+      provideApolloClient(apolloClient);
       try {
-        const queryString = `user:${username} ${query}`;
-        const {
-          result,
-          loading,
-        } = useQuery(
+        const query = `user:${username} ${queryString}`;
+        const { result } = useQuery(
           GET_REPOSITORIES_BY_QUERY,
-          { query: queryString },
+          { query },
         );
-        watchEffect(() => {
-          this.isLoading = loading.value;
-          this.totalPages = Math.ceil(this.data.length / this.limit);
-          this.data = result.value?.search?.edges || [];
-          this.paginatedData = this.data.slice(
-            currentPage - 1,
-            currentPage - 1 + this.limit,
-          );
-          this.currentPage = currentPage;
-          this.isLoading = loading.value;
-        });
+
+        this.data = result.value?.search?.edges || [];
+        this.totalPages = Math.ceil(this.data.length / this.limit);
+        this.paginateRepositories(currentPage);
+
       } catch (error) {
         return error;
       }
@@ -55,7 +47,6 @@ export const useRepositoriesStore = defineStore("repositories", {
       username: string,
       name: string,
     ) {
-      provideApolloClient(apolloClient);
       try {
         const {
           result,
@@ -74,20 +65,19 @@ export const useRepositoriesStore = defineStore("repositories", {
           }
 
           if (!error.value) {
-            this.isLoading = loading.value;
             this.object = result.value?.repository || {};
           }
-
-          this.isLoading = loading.value;
         });
       } catch (error) {
         console.log(error);
       }
     },
     paginateRepositories(page: number) {
+      const startIndex = (page - 1) * this.limit;
+      const endIndex = startIndex + this.limit;
       this.paginatedData = this.data.slice(
-        page - 1,
-        page - 1 + this.limit,
+        startIndex,
+        endIndex,
       );
       this.currentPage = page;
     },
