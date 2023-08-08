@@ -1,17 +1,19 @@
 <template>
   <main>
+    <p>Loading: {{ repositoriesStore.isLoading }}</p>
     <custom-input
       v-model="searchQuery"
       placeholder="search..."
       class="input__search"
     />
-    <repository-list :repositories="filteredRepositories" />
+      <repository-list :repositories="repositories" />
   </main>
 </template>
 
 <script lang="ts">
 import {
   defineComponent,
+  ref,
   watchEffect,
 } from "vue";
 import RepositoryList from "../components/Repository/List.vue";
@@ -32,40 +34,35 @@ export default defineComponent({
       searchQuery: "",
     };
   },
-  methods: {
-    fetchRepositories() {
-      this.isLoading = true;
-      watchEffect(() => {
-        repositoriesStore.getRepositoriesByUsername(import.meta.env.username);
-        this.repositories = repositoriesStore.data;
-      });
-      this.isLoading = false;
-    },
-    searchRepositories() {
-      this.isLoading = true;
-      watchEffect(() => {
-        repositoriesStore.getRepositoriesByQuery(
-          import.meta.env.username,
-          this.searchQuery
-        );
-        this.repositories = repositoriesStore.data;
-      });
-      this.isLoading = false;
-    },
-  },
-  mounted() {
-    this.fetchRepositories();
-  },
-  computed: {
-    filteredRepositories() {
-      // this.isLoading = true;
-      // watchEffect(() => {
-      //   repositoriesStore.getRepositoriesByUsername(import.meta.env.VITE_GITHUB_USERNAME);
-      //   this.repositories = repositoriesStore.data;
-      // });
-      // this.isLoading = false;
-      return repositoriesStore.data;
-    },
+  setup() {
+    const repositories = ref([]);
+    const searchQuery = ref("");
+
+    const fetchRepositories = () => {
+      repositoriesStore.getRepositoriesByUsername(username);
+      repositories.value = repositoriesStore.data;
+    };
+
+    const searchRepositories = () => {
+      repositoriesStore.getRepositoriesByQuery(username, searchQuery.value);
+      repositories.value = repositoriesStore.data;
+    };
+
+    watchEffect(() => {
+      if (searchQuery.value === "") {
+        fetchRepositories();
+      } else {
+        searchRepositories();
+      }
+    });
+
+    const isLoading = repositoriesStore.isLoading;
+    return {
+      repositories,
+      isLoading,
+      searchQuery,
+      repositoriesStore,
+    };
   },
 });
 

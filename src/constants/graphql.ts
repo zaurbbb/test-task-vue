@@ -17,7 +17,7 @@ query GetUserRepositories($username: String!) {
 }
 `;
 export const GET_REPOSITORIES_BY_QUERY = gql`
-query GetRepositories($query: String!) {
+query GetSearchedRepositories($query: String!) {
   search(query: $query, type: REPOSITORY, first: 20) {
     repositoryCount
     edges {

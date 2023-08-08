@@ -1,6 +1,11 @@
-import { useQuery } from "@vue/apollo-composable";
+import {
+  DefaultApolloClient,
+  provideApolloClient,
+  useQuery,
+} from "@vue/apollo-composable";
 import { defineStore } from "pinia";
 import { watchEffect } from "vue";
+import { apolloClient } from "../api/index";
 import {
   GET_REPOSITORIES_BY_QUERY,
   GET_REPOSITORIES_BY_USERNAME,
@@ -17,55 +22,54 @@ interface State {
 }
 
 export const useRepositoriesStore = defineStore('repositories', {
+  // useApollo()
   state: (): State => ({
     data: [],
     isLoading: false,
   }),
-
   actions: {
     getRepositoriesByUsername(username: string) {
-      this.isLoading = true;
       try {
         const {
           result,
           loading,
-        } = useQuery(GET_REPOSITORIES_BY_USERNAME, {
-          username,
-        });
-
+        } = useQuery(
+          GET_REPOSITORIES_BY_USERNAME,
+          { username },
+        );
         watchEffect(() => {
+          this.isLoading = loading.value;
           this.data = result.value?.user?.repositories?.edges || [];
           this.isLoading = loading.value;
         });
       } catch (error) {
         return error;
-      } finally {
-        this.isLoading = false;
       }
     },
     getRepositoriesByQuery(
       username: string,
-      query: string
+      query: string,
     ) {
-      this.isLoading = true;
+      provideApolloClient(apolloClient);
       try {
+        const queryString = `user:${username} ${query}`;
+        console.log(queryString);
         const {
           result,
           loading,
-        } = useQuery(GET_REPOSITORIES_BY_QUERY, {
-          query: `user:${username} ${query}`,
-        });
-
+        } = useQuery(
+          GET_REPOSITORIES_BY_QUERY,
+          { query: queryString },
+        );
         watchEffect(() => {
+          this.isLoading = loading.value;
           this.data = result.value?.search?.edges || [];
           this.isLoading = loading.value;
         });
       } catch (error) {
-        return error;
-      } finally {
-        this.isLoading = false;
+        console.log(error);
       }
-    }
+    },
   },
 });
 
