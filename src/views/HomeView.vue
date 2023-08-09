@@ -1,17 +1,12 @@
 <template>
   <section>
+
+    <h3>{{ username }}'s repositories list</h3>
     <custom-input
       v-model="searchQuery"
       placeholder="Search..."
       class="input__search"
     />
-    <h3>{{ username }}'s repositories list</h3>
-    <repository-list
-      v-if="paginatedRepositories.length > 0"
-      :repositories="searchQuery === '' ? paginatedRepositories : repositories"
-    />
-    <h2 v-if="isLoading === false && paginatedRepositories.length === 0">No data...</h2>
-    <custom-loader v-if="isLoading" />
     <div
       v-if="searchQuery === ''"
       class="pagination"
@@ -28,6 +23,12 @@
         {{ pageNumber }}
       </div>
     </div>
+    <repository-list
+      v-if="repositories.length > 0"
+      :repositories="searchQuery === '' ? paginatedRepositories : repositories"
+    />
+    <h2 v-else-if="repositories.length === 0">No data...</h2>
+    <custom-loader v-else/>
   </section>
 </template>
 
@@ -50,29 +51,24 @@ export default defineComponent({
   },
   setup() {
     const repositoriesStore = useRepositoriesStore();
-    const repositories = ref(null);
-    const paginatedRepositories = ref(null);
+    const repositories = ref([]);
+    const paginatedRepositories = ref([]);
     const isLoading = ref(false);
-    const searchQuery = ref("");
-    const currentPage = ref(1);
-    const totalPages = ref(0);
+    const searchQuery = ref(repositoriesStore.searchQuery);
+    const currentPage = ref(repositoriesStore.currentPage);
+    const totalPages = ref(repositoriesStore.totalPages);
     const username = import.meta.env.VITE_GITHUB_USERNAME;
 
     const fetchRepositories = async () => {
-      isLoading.value = true;
-
-      await repositoriesStore.getRepositories(
-        username,
-        searchQuery.value,
-        currentPage.value
-      );
-
-      repositories.value = repositoriesStore.data;
-      paginatedRepositories.value = repositoriesStore.paginatedData;
-      totalPages.value = repositoriesStore.totalPages;
-      currentPage.value = repositoriesStore.currentPage;
-
-      isLoading.value = false;
+    await repositoriesStore.getRepositories(
+      username,
+      searchQuery.value,
+      currentPage.value,
+    );
+    repositories.value = repositoriesStore.data;
+    paginatedRepositories.value = repositoriesStore.paginatedData;
+    totalPages.value = repositoriesStore.totalPages;
+    currentPage.value = repositoriesStore.currentPage;
     };
 
     watchEffect(() => {
@@ -105,7 +101,7 @@ export default defineComponent({
   display: flex;
   justify-content: center;
   align-items: center;
-  margin: 20px 0;
+  margin: 10px 0;
   gap: 10px;
 
   &__item {

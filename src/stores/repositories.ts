@@ -20,6 +20,7 @@ export const useRepositoriesStore = defineStore("repositories", {
     currentPage: 1,
     totalPages: 0,
     limit: 10,
+    searchQuery: "",
   }),
   actions: {
     getRepositories(
@@ -30,17 +31,19 @@ export const useRepositoriesStore = defineStore("repositories", {
       provideApolloClient(apolloClient);
       try {
         const query = `user:${username} ${queryString}`;
+        this.searchQuery = queryString;
         const { result } = useQuery(
           GET_REPOSITORIES_BY_QUERY,
           { query },
         );
-
         this.data = result.value?.search?.edges || [];
         this.totalPages = Math.ceil(this.data.length / this.limit);
-        this.paginateRepositories(currentPage);
+        if (this.searchQuery === "") {
+          this.paginateRepositories(currentPage);
+        }
 
       } catch (error) {
-        return error;
+        console.log(error);
       }
     },
     getRepositoryByName(
@@ -82,6 +85,7 @@ export const useRepositoriesStore = defineStore("repositories", {
       this.currentPage = page;
     },
   },
+  persist: true,
 });
 
 
@@ -95,7 +99,7 @@ interface PrimaryLanguage {
   name: string;
 }
 
-interface Repository {
+export interface Repository {
   id: number;
   name: string;
   stargazerCount: number;
@@ -109,6 +113,12 @@ interface Repository {
 
 interface State {
   data: Repository[];
+  paginatedData: Repository[];
   object: Repository;
   isLoading: boolean;
+  error: null | String;
+  currentPage: number;
+  totalPages: number;
+  limit: number;
+  searchQuery: string;
 }

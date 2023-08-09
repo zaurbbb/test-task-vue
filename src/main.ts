@@ -6,6 +6,7 @@ import {
   h,
   provide,
 } from "vue";
+import piniaPluginPersistedState from "pinia-plugin-persistedstate";
 
 import { apolloClient } from "./api";
 
@@ -16,18 +17,21 @@ import "./styles/main.css";
 
 const apolloProvider = createApolloProvider({
   defaultClient: apolloClient,
-})
+});
+
+const pinia = createPinia();
+pinia.use(piniaPluginPersistedState);
 
 const app = createApp({
   setup() {
-    provide(DefaultApolloClient, apolloClient)
+    provide(DefaultApolloClient, apolloClient);
   },
 
   render: () => h(App),
 });
 
 app.use(apolloProvider);
-app.use(createPinia());
+app.use(pinia);
 app.use(router);
 
 app.mount("#app");
